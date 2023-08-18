@@ -1,0 +1,9 @@
+<resources>
+    <style
+        name="Base.Theme.ShoppingList" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/green_main</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
+    <style name="Theme.ShoppingList" parent="Base.Theme.ShoppingList" />
+</resources>
