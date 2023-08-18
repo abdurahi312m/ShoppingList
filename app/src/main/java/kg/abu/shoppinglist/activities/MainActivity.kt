@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.util.Log
 import kg.abu.shoppinglist.R
 import kg.abu.shoppinglist.databinding.ActivityMainBinding
+import kg.abu.shoppinglist.fragments.FragmentManager
+import kg.abu.shoppinglist.fragments.NoteFragment
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -24,7 +26,7 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 R.id.notes -> {
-                    Log.d("MyTAG", "setBottomNavListener: notes")
+                    FragmentManager.setFragment(NoteFragment.newInstance(), this)
                 }
 
                 R.id.shop_list -> {
