@@ -5,7 +5,7 @@ import kg.abu.shoppinglist.R
 
 object FragmentManager {
 
-    private var currentFragment: BaseFragment? = null
+    var currentFragment: BaseFragment? = null
 
     fun setFragment(newFragment: BaseFragment, activity: AppCompatActivity) {
         val transaction = activity.supportFragmentManager.beginTransaction()
