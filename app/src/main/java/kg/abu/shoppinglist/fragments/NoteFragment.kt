@@ -1,11 +1,13 @@
 package kg.abu.shoppinglist.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import kg.abu.shoppinglist.activities.NewNoteActivity
 import kg.abu.shoppinglist.activities.YourMainApp
 import kg.abu.shoppinglist.databinding.FragmentNoteBinding
 import kg.abu.shoppinglist.db.MainViewModel
@@ -17,6 +19,7 @@ class NoteFragment : BaseFragment() {
     }
 
     override fun onClickNew() {
+        startActivity(Intent(activity, NewNoteActivity::class.java))
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 R.id.new_item -> {
-                    Log.d("MyTAG", "setBottomNavListener: new item")
+                    FragmentManager.currentFragment?.onClickNew()
                 }
             }
             true
