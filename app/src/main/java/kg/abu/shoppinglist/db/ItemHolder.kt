@@ -11,10 +11,13 @@ import kg.abu.shoppinglist.entities.NoteItem
 class ItemHolder(view: View) : RecyclerView.ViewHolder(view) {
     private val binding = NoteListItemBinding.bind(view)
 
-    fun setData(note: NoteItem) = with(binding) {
+    fun setData(note: NoteItem, listener: Listener) = with(binding) {
         tvTitle.text = note.title
-        tvDescripttion.text = note.content
+        tvDescription.text = note.content
         tvTime.text = note.time
+        imDelete.setOnClickListener {
+            listener.deleteItem(note.id!!)
+        }
     }
 
     companion object {

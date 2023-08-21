@@ -3,10 +3,10 @@ package kg.abu.shoppinglist.fragments
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.activityViewModels
@@ -14,11 +14,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import kg.abu.shoppinglist.activities.NewNoteActivity
 import kg.abu.shoppinglist.activities.YourMainApp
 import kg.abu.shoppinglist.databinding.FragmentNoteBinding
+import kg.abu.shoppinglist.db.Listener
 import kg.abu.shoppinglist.db.MainViewModel
 import kg.abu.shoppinglist.db.NoteAdapter
 import kg.abu.shoppinglist.entities.NoteItem
 
-class NoteFragment : BaseFragment() {
+class NoteFragment : BaseFragment(), Listener {
     private lateinit var binding: FragmentNoteBinding
     private lateinit var editLauncher: ActivityResultLauncher<Intent>
     private lateinit var adapter: NoteAdapter
@@ -52,7 +53,7 @@ class NoteFragment : BaseFragment() {
 
     private fun initRcView() = with(binding) {
         rcViewNote.layoutManager = LinearLayoutManager(activity)
-        adapter = NoteAdapter()
+        adapter = NoteAdapter(this@NoteFragment)
         rcViewNote.adapter = adapter
     }
 
@@ -77,5 +78,10 @@ class NoteFragment : BaseFragment() {
 
         @JvmStatic
         fun newInstance() = NoteFragment()
+    }
+
+    override fun deleteItem(id: Int) {
+        mainViewModel.deleteNote(id)
+        Toast.makeText(activity, "Deleted", Toast.LENGTH_SHORT).show()
     }
 }
