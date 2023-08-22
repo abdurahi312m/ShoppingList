@@ -15,6 +15,9 @@ class ItemHolder(view: View) : RecyclerView.ViewHolder(view) {
         tvTitle.text = note.title
         tvDescription.text = note.content
         tvTime.text = note.time
+        itemView.setOnClickListener {
+            listener.onClickItem(note)
+        }
         imDelete.setOnClickListener {
             listener.deleteItem(note.id!!)
         }
