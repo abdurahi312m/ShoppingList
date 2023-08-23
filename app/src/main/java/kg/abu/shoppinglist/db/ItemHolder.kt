@@ -7,13 +7,14 @@ import androidx.recyclerview.widget.RecyclerView
 import kg.abu.shoppinglist.R
 import kg.abu.shoppinglist.databinding.NoteListItemBinding
 import kg.abu.shoppinglist.entities.NoteItem
+import kg.abu.shoppinglist.utils.HtmlManager
 
 class ItemHolder(view: View) : RecyclerView.ViewHolder(view) {
     private val binding = NoteListItemBinding.bind(view)
 
     fun setData(note: NoteItem, listener: Listener) = with(binding) {
         tvTitle.text = note.title
-        tvDescription.text = note.content
+        tvDescription.text = HtmlManager.getFromHtml(note.content).trim()
         tvTime.text = note.time
         itemView.setOnClickListener {
             listener.onClickItem(note)
