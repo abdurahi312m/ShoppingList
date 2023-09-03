@@ -21,6 +21,7 @@ import kg.abu.shoppinglist.databinding.ActivityNewNoteBinding
 import kg.abu.shoppinglist.entities.NoteItem
 import kg.abu.shoppinglist.fragments.NoteFragment
 import kg.abu.shoppinglist.utils.HtmlManager
+import kg.abu.shoppinglist.utils.TimeManager
 import kg.abu.shoppinglist.utils.YourTouchListener
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -165,14 +166,9 @@ class NewNoteActivity : AppCompatActivity() {
             null,
             binding.edTitle.text.toString(),
             HtmlManager.toHtml(binding.edDescription.text),
-            getCurrentTime(),
+            TimeManager.getCurrentTime(),
             ""
         )
-    }
-
-    private fun getCurrentTime(): String {
-        val formatter = SimpleDateFormat("hh:mm:ss - yyyy/MM/dd", Locale.getDefault())
-        return formatter.format(Calendar.getInstance().time)
     }
 
     private fun actionBarSettings() {
