@@ -11,4 +11,5 @@
     <color name="picker_black">#0B0B0B</color>
     <color name="picker_yellow">#FBBD02</color>
     <color name="picker_orange">#8B4F06</color>
+    <color name="list_name_item">#353332</color>
 </resources>

@@ -6,14 +6,20 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import kg.abu.shoppinglist.entities.NoteItem
+import kg.abu.shoppinglist.entities.ShoppingListName
 import kotlinx.coroutines.launch
 
 class MainViewModel(database: MainDatabase) : ViewModel() {
     private val dao = database.getDao()
     val allNotes: LiveData<List<NoteItem>> = dao.getAllNotes().asLiveData()
+    val allShopListNames: LiveData<List<ShoppingListName>> = dao.getAllShopListNames().asLiveData()
 
     fun insertNote(note: NoteItem) = viewModelScope.launch {
         dao.insertNote(note)
+    }
+
+    fun insertShopListName(listName: ShoppingListName) = viewModelScope.launch {
+        dao.insertShopListName(listName)
     }
 
     fun updateNote(note: NoteItem) = viewModelScope.launch {
@@ -22,6 +28,10 @@ class MainViewModel(database: MainDatabase) : ViewModel() {
 
     fun deleteNote(id: Int) = viewModelScope.launch {
         dao.deleteNote(id)
+    }
+
+    fun deleteShopListName(id: Int) = viewModelScope.launch {
+        dao.deleteShopListName(id)
     }
 
     class MainViewModelFactory(private val database: MainDatabase) : ViewModelProvider.Factory {
@@ -33,6 +43,5 @@ class MainViewModel(database: MainDatabase) : ViewModel() {
             throw IllegalArgumentException("Unknown ViewModelClass")
         }
     }
-
 
 }

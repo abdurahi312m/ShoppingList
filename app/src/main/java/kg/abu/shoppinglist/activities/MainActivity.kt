@@ -5,16 +5,20 @@ import android.os.Bundle
 import android.util.Log
 import kg.abu.shoppinglist.R
 import kg.abu.shoppinglist.databinding.ActivityMainBinding
+import kg.abu.shoppinglist.dialogs.Listener
+import kg.abu.shoppinglist.dialogs.NewListDialog
 import kg.abu.shoppinglist.fragments.FragmentManager
 import kg.abu.shoppinglist.fragments.NoteFragment
+import kg.abu.shoppinglist.fragments.ShopListNamesFragment
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), Listener {
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        FragmentManager.setFragment(ShopListNamesFragment.newInstance(), this)
         setBottomNavListener()
     }
 
@@ -30,7 +34,7 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 R.id.shop_list -> {
-                    Log.d("MyTAG", "setBottomNavListener: shop list")
+                    FragmentManager.setFragment(ShopListNamesFragment.newInstance(), this)
                 }
 
                 R.id.new_item -> {
@@ -39,5 +43,9 @@ class MainActivity : AppCompatActivity() {
             }
             true
         }
+    }
+
+    override fun onClick(name: String) {
+        Log.d("TAG", "onClick: $name ")
     }
 }
