@@ -14,14 +14,18 @@ import kg.abu.shoppinglist.utils.HtmlManager
 class ShoppingListNameItemHolder(view: View) : RecyclerView.ViewHolder(view) {
     private val binding = ListNameItemBinding.bind(view)
 
-    fun setData(shopListNameItem: ShoppingListName, listener: ShopListNameListener) = with(binding) {
-        tvListName.text = shopListNameItem.name
-        tvTime.text = shopListNameItem.time
-        itemView.setOnClickListener {}
-        imDelete.setOnClickListener {
-            listener.deleteItem(shopListNameItem.id!!)
+    fun setData(shopListNameItem: ShoppingListName, listener: ShopListNameListener) =
+        with(binding) {
+            tvListName.text = shopListNameItem.name
+            tvTime.text = shopListNameItem.time
+            itemView.setOnClickListener {}
+            imDelete.setOnClickListener {
+                listener.deleteItem(shopListNameItem.id!!)
+            }
+            imEdit.setOnClickListener {
+                listener.editItem(shopListNameItem)
+            }
         }
-    }
 
     companion object {
         fun create(parent: ViewGroup): ShoppingListNameItemHolder {
