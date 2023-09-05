@@ -1,13 +1,13 @@
 package kg.abu.shoppinglist.db
 
-import kg.abu.shoppinglist.entities.ShoppingListName
+import kg.abu.shoppinglist.entities.ShopListNameItem
 
 interface ShopListNameListener {
 
     fun deleteItem(id: Int) {}
 
-    fun editItem(shopListName: ShoppingListName) {}
+    fun editItem(shopListNameItem: ShopListNameItem) {}
 
-    fun onClickItem(shopListName: ShoppingListName) {}
+    fun onClickItem(shopListNameItem: ShopListNameItem) {}
 
 }

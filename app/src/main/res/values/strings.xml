@@ -11,7 +11,12 @@
     <string name="create_list">Create List</string>
     <string name="delete_alert">Delete</string>
     <string name="cancel">Cancel</string>
+    <string name="item">New Item</string>
     <string name="update">Update List</string>
     <string name="update_list_name">Update List Name</string>
     <string name="delete_item">Do you want delete this item?</string>
+    <string name="delete_list">Delete List</string>
+    <string name="clear_list">Clear List</string>
+    <string name="share_list">Share List</string>
+    <string name="save_item">Save item</string>
 </resources>

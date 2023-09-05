@@ -16,6 +16,7 @@ import kg.abu.shoppinglist.activities.YourMainApp
 import kg.abu.shoppinglist.databinding.FragmentNoteBinding
 import kg.abu.shoppinglist.db.Listener
 import kg.abu.shoppinglist.db.MainViewModel
+import kg.abu.shoppinglist.db.MainViewModelFactory
 import kg.abu.shoppinglist.db.NoteAdapter
 import kg.abu.shoppinglist.entities.NoteItem
 
@@ -25,7 +26,7 @@ class NoteFragment : BaseFragment(), Listener {
     private lateinit var adapter: NoteAdapter
 
     private val mainViewModel: MainViewModel by activityViewModels {
-        MainViewModel.MainViewModelFactory((context?.applicationContext as YourMainApp).database)
+        MainViewModelFactory((context?.applicationContext as YourMainApp).database)
     }
 
     override fun onClickNew() {

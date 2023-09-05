@@ -6,19 +6,18 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kg.abu.shoppinglist.R
 import kg.abu.shoppinglist.databinding.ListNameItemBinding
-import kg.abu.shoppinglist.databinding.NoteListItemBinding
-import kg.abu.shoppinglist.entities.NoteItem
-import kg.abu.shoppinglist.entities.ShoppingListName
-import kg.abu.shoppinglist.utils.HtmlManager
+import kg.abu.shoppinglist.entities.ShopListNameItem
 
 class ShoppingListNameItemHolder(view: View) : RecyclerView.ViewHolder(view) {
     private val binding = ListNameItemBinding.bind(view)
 
-    fun setData(shopListNameItem: ShoppingListName, listener: ShopListNameListener) =
+    fun setData(shopListNameItem: ShopListNameItem, listener: ShopListNameListener) =
         with(binding) {
             tvListName.text = shopListNameItem.name
             tvTime.text = shopListNameItem.time
-            itemView.setOnClickListener {}
+            itemView.setOnClickListener {
+                listener.onClickItem(shopListNameItem)
+            }
             imDelete.setOnClickListener {
                 listener.deleteItem(shopListNameItem.id!!)
             }
