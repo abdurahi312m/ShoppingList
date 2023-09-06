@@ -8,7 +8,7 @@ import kg.abu.shoppinglist.R
 import kg.abu.shoppinglist.databinding.ListNameItemBinding
 import kg.abu.shoppinglist.entities.ShopListNameItem
 
-class ShoppingListNameItemHolder(view: View) : RecyclerView.ViewHolder(view) {
+class ShopListNameItemHolder(view: View) : RecyclerView.ViewHolder(view) {
     private val binding = ListNameItemBinding.bind(view)
 
     fun setData(shopListNameItem: ShopListNameItem, listener: ShopListNameListener) =
@@ -27,8 +27,8 @@ class ShoppingListNameItemHolder(view: View) : RecyclerView.ViewHolder(view) {
         }
 
     companion object {
-        fun create(parent: ViewGroup): ShoppingListNameItemHolder {
-            return ShoppingListNameItemHolder(
+        fun create(parent: ViewGroup): ShopListNameItemHolder {
+            return ShopListNameItemHolder(
                 LayoutInflater.from(parent.context)
                     .inflate(R.layout.list_name_item, parent, false)
             )
