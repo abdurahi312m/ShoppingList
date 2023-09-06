@@ -5,13 +5,13 @@ import androidx.recyclerview.widget.ListAdapter
 import kg.abu.shoppinglist.entities.ShopListNameItem
 
 class ShopListNameAdapter(private val listener: ShopListNameListener) :
-    ListAdapter<ShopListNameItem, ShoppingListNameItemHolder>(ShopListNameItemComparator()) {
+    ListAdapter<ShopListNameItem, ShopListNameItemHolder>(ShopListNameItemComparator()) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShoppingListNameItemHolder {
-        return ShoppingListNameItemHolder.create(parent)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShopListNameItemHolder {
+        return ShopListNameItemHolder.create(parent)
     }
 
-    override fun onBindViewHolder(holder: ShoppingListNameItemHolder, position: Int) {
+    override fun onBindViewHolder(holder: ShopListNameItemHolder, position: Int) {
         holder.setData(getItem(position), listener)
     }
 
