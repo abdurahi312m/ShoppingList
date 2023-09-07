@@ -2,10 +2,10 @@ package kg.abu.shoppinglist.adapter
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
-import kg.abu.shoppinglist.entities.ShoppingListItem
+import kg.abu.shoppinglist.entities.ShopListItem
 
 class ShopListItemAdapter(private val listener: ShopListItemListener) :
-    ListAdapter<ShoppingListItem, ShopListItemHolder>(ShopListItemComparator()) {
+    ListAdapter<ShopListItem, ShopListItemHolder>(ShopListItemComparator()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShopListItemHolder {
         return if (viewType == 0) {

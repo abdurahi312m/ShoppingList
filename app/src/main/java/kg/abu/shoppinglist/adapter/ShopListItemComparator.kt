@@ -1,16 +1,15 @@
 package kg.abu.shoppinglist.adapter
 
 import androidx.recyclerview.widget.DiffUtil
-import kg.abu.shoppinglist.entities.ShopListNameItem
-import kg.abu.shoppinglist.entities.ShoppingListItem
+import kg.abu.shoppinglist.entities.ShopListItem
 
-class ShopListItemComparator : DiffUtil.ItemCallback<ShoppingListItem>() {
+class ShopListItemComparator : DiffUtil.ItemCallback<ShopListItem>() {
 
-    override fun areItemsTheSame(oldItem: ShoppingListItem, newItem: ShoppingListItem): Boolean {
+    override fun areItemsTheSame(oldItem: ShopListItem, newItem: ShopListItem): Boolean {
         return oldItem.id == newItem.id
     }
 
-    override fun areContentsTheSame(oldItem: ShoppingListItem, newItem: ShoppingListItem): Boolean {
+    override fun areContentsTheSame(oldItem: ShopListItem, newItem: ShopListItem): Boolean {
         return oldItem == newItem
     }
 

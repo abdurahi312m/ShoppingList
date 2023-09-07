@@ -6,17 +6,19 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kg.abu.shoppinglist.R
 import kg.abu.shoppinglist.databinding.ListNameItemBinding
-import kg.abu.shoppinglist.entities.ShopListNameItem
-import kg.abu.shoppinglist.entities.ShoppingListItem
+import kg.abu.shoppinglist.databinding.ShopListItemBinding
+import kg.abu.shoppinglist.entities.ShopListItem
 
-class ShopListItemHolder(view: View) : RecyclerView.ViewHolder(view) {
-    private val binding = ListNameItemBinding.bind(view)
+class ShopListItemHolder(val view: View) : RecyclerView.ViewHolder(view) {
 
-    fun setItemData(shopListItem: ShoppingListItem, listener: ShopListItemListener) =
-        with(binding) {}
+    fun setItemData(shopListItem: ShopListItem, listener: ShopListItemListener) {
+        val binding = ShopListItemBinding.bind(view)
+        binding.apply {
+            tvName.text = shopListItem.name
+        }
+    }
 
-    fun setLibraryData(shopListItem: ShoppingListItem, listener: ShopListItemListener) =
-        with(binding) {}
+    fun setLibraryData(shopListItem: ShopListItem, listener: ShopListItemListener) {}
 
     companion object {
         fun createShopItem(parent: ViewGroup): ShopListItemHolder {
