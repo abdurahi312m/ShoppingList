@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.MenuItem.OnActionExpandListener
+import android.view.View
 import android.widget.EditText
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -71,6 +72,11 @@ class ShopListActivity : AppCompatActivity(), ShopListItemListener {
     private fun listItemObserver() {
         mainViewModel.getAllItemsFromList(shopListNameItem?.id!!).observe(this) {
             adapter?.submitList(it)
+            binding.tvEmpty.visibility = if (it.isEmpty()) {
+                View.VISIBLE
+            } else {
+                View.GONE
+            }
         }
     }
 
@@ -97,7 +103,6 @@ class ShopListActivity : AppCompatActivity(), ShopListItemListener {
 
     private fun init() {
         shopListNameItem = intent.getSerializableExtra(SHOP_LIST_NAME) as ShopListNameItem
-        binding.tvTest.text = shopListNameItem?.name
     }
 
     companion object {
