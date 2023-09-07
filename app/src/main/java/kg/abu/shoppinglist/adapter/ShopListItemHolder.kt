@@ -1,11 +1,12 @@
 package kg.abu.shoppinglist.adapter
 
+import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import kg.abu.shoppinglist.R
-import kg.abu.shoppinglist.databinding.ListNameItemBinding
 import kg.abu.shoppinglist.databinding.ShopListItemBinding
 import kg.abu.shoppinglist.entities.ShopListItem
 
@@ -17,10 +18,27 @@ class ShopListItemHolder(val view: View) : RecyclerView.ViewHolder(view) {
             tvName.text = shopListItem.name
             tvInfo.text = shopListItem.itemInfo
             tvInfo.visibility = infoVisibility(shopListItem)
+            checkBox.setOnClickListener {
+                setPaintFlagAndColor(binding)
+            }
         }
     }
 
     fun setLibraryData(shopListItem: ShopListItem, listener: ShopListItemListener) {}
+
+    private fun setPaintFlagAndColor(binding: ShopListItemBinding) {
+        binding.apply {
+            if (checkBox.isChecked) {
+                tvName.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
+                tvName.setTextColor(ContextCompat.getColor(binding.root.context, R.color.gray_light))
+                tvInfo.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
+                tvInfo.setTextColor(ContextCompat.getColor(binding.root.context, R.color.gray_light))
+            } else {
+                tvName.paintFlags = Paint.ANTI_ALIAS_FLAG
+                tvInfo.paintFlags = Paint.ANTI_ALIAS_FLAG
+            }
+        }
+    }
 
     private fun infoVisibility(shopListItem: ShopListItem): Int {
         return if (shopListItem.itemInfo.isNullOrEmpty()) {

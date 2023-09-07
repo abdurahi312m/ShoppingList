@@ -12,4 +12,5 @@
     <color name="picker_yellow">#FBBD02</color>
     <color name="picker_orange">#8B4F06</color>
     <color name="list_name_item">#353332</color>
+    <color name="gray_light">#787573</color>
 </resources>
