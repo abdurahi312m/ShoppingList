@@ -61,7 +61,7 @@ class ShopListActivity : AppCompatActivity(), ShopListItemListener {
             null,
             edItem?.text.toString(),
             null,
-            0,
+            false,
             shopListNameItem?.id!!,
             0
         )
@@ -113,11 +113,7 @@ class ShopListActivity : AppCompatActivity(), ShopListItemListener {
 
     }
 
-    override fun editItem(shopListNameItem: ShopListNameItem) {
-
-    }
-
-    override fun onClickItem(shopListNameItem: ShopListNameItem) {
-
+    override fun onClickItem(shopListItem: ShopListItem) {
+        mainViewModel.updateListItem(shopListItem)
     }
 }

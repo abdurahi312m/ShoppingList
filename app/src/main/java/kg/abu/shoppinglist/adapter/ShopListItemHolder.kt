@@ -18,8 +18,10 @@ class ShopListItemHolder(val view: View) : RecyclerView.ViewHolder(view) {
             tvName.text = shopListItem.name
             tvInfo.text = shopListItem.itemInfo
             tvInfo.visibility = infoVisibility(shopListItem)
+            checkBox.isChecked = shopListItem.itemChecked
+            setPaintFlagAndColor(binding)
             checkBox.setOnClickListener {
-                setPaintFlagAndColor(binding)
+                listener.onClickItem(shopListItem.copy(itemChecked = checkBox.isChecked))
             }
         }
     }
