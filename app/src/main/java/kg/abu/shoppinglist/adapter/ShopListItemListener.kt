@@ -5,8 +5,6 @@ import kg.abu.shoppinglist.entities.ShopListNameItem
 
 interface ShopListItemListener {
 
-    fun deleteItem(id: Int) {}
-
-    fun onClickItem(shopListItem: ShopListItem) {}
+    fun onClickItem(shopListItem: ShopListItem, state: Int) {}
 
 }

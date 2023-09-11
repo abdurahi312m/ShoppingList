@@ -11,5 +11,8 @@ data class LibraryItem(
     val id: Int?,
 
     @ColumnInfo(name = "name")
-    val name: String
+    val name: String,
+
+    @ColumnInfo(name = "price", defaultValue = "")
+    val price: String
 )
