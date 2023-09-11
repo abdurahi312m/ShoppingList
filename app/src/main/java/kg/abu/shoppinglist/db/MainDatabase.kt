@@ -16,7 +16,9 @@ import kg.abu.shoppinglist.entities.ShopListNameItem
         ShopListItem::class,
         ShopListNameItem::class
     ],
-    version = 1
+    version = 1,
+    /*exportSchema = true,
+    autoMigrations = [AutoMigration(from = 2, to = 3)]*/
 )
 abstract class MainDatabase : RoomDatabase() {
     abstract fun getDao(): Dao

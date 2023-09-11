@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import kg.abu.shoppinglist.R
+import kg.abu.shoppinglist.adapter.ShopListItemAdapter.Companion.CHECK_BOX
+import kg.abu.shoppinglist.adapter.ShopListItemAdapter.Companion.EDIT
 import kg.abu.shoppinglist.databinding.ShopListItemBinding
 import kg.abu.shoppinglist.entities.ShopListItem
 
@@ -21,7 +23,10 @@ class ShopListItemHolder(val view: View) : RecyclerView.ViewHolder(view) {
             checkBox.isChecked = shopListItem.itemChecked
             setPaintFlagAndColor(binding)
             checkBox.setOnClickListener {
-                listener.onClickItem(shopListItem.copy(itemChecked = checkBox.isChecked))
+                listener.onClickItem(shopListItem.copy(itemChecked = checkBox.isChecked), CHECK_BOX)
+            }
+            imEdit.setOnClickListener {
+                listener.onClickItem(shopListItem, EDIT)
             }
         }
     }

@@ -18,5 +18,6 @@
     <string name="delete_list">Delete List</string>
     <string name="clear_list">Clear List</string>
     <string name="share_list">Share List</string>
+    <string name="update_list_item">Update List Item</string>
     <string name="save_item">Save item</string>
 </resources>

@@ -27,4 +27,9 @@ class ShopListItemAdapter(private val listener: ShopListItemListener) :
         return getItem(position).itemType
     }
 
+    companion object {
+        const val EDIT = 0
+        const val CHECK_BOX = 1
+    }
+
 }

@@ -15,6 +15,8 @@ import kg.abu.shoppinglist.adapter.ShopListItemListener
 import kg.abu.shoppinglist.databinding.ActivityShopListBinding
 import kg.abu.shoppinglist.db.MainViewModel
 import kg.abu.shoppinglist.db.MainViewModelFactory
+import kg.abu.shoppinglist.dialogs.EditListItemDialog
+import kg.abu.shoppinglist.dialogs.EditListItemListener
 import kg.abu.shoppinglist.entities.ShopListItem
 import kg.abu.shoppinglist.entities.ShopListNameItem
 
@@ -49,8 +51,18 @@ class ShopListActivity : AppCompatActivity(), ShopListItemListener {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.save_item) {
-            adNewShopItem()
+        when (item.itemId) {
+            R.id.save_item -> {
+                adNewShopItem()
+            }
+            R.id.delete_list -> {
+                mainViewModel.deleteShopList(shopListNameItem?.id!!, true)
+                finish()
+            }
+            R.id.clear_list -> {
+                mainViewModel.deleteShopList(shopListNameItem?.id!!, false)
+                finish()
+            }
         }
         return super.onOptionsItemSelected(item)
     }
@@ -60,7 +72,7 @@ class ShopListActivity : AppCompatActivity(), ShopListItemListener {
         val item = ShopListItem(
             null,
             edItem?.text.toString(),
-            null,
+            "",
             false,
             shopListNameItem?.id!!,
             0
@@ -109,11 +121,23 @@ class ShopListActivity : AppCompatActivity(), ShopListItemListener {
         const val SHOP_LIST_NAME = "shopListName"
     }
 
-    override fun deleteItem(id: Int) {
+    override fun onClickItem(shopListItem: ShopListItem, state: Int) {
+        when (state) {
+            ShopListItemAdapter.CHECK_BOX -> {
+                mainViewModel.updateListItem(shopListItem)
+            }
 
+            ShopListItemAdapter.EDIT -> {
+                editListItem(shopListItem)
+            }
+        }
     }
 
-    override fun onClickItem(shopListItem: ShopListItem) {
-        mainViewModel.updateListItem(shopListItem)
+    private fun editListItem(item: ShopListItem) {
+        EditListItemDialog.showDialog(this, item, object : EditListItemListener {
+            override fun onClick(item: ShopListItem) {
+                mainViewModel.updateListItem(item)
+            }
+        })
     }
 }
