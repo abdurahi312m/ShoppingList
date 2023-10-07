@@ -1,5 +1,6 @@
 package kg.abu.shoppinglist.activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -19,6 +20,7 @@ import kg.abu.shoppinglist.dialogs.EditListItemDialog
 import kg.abu.shoppinglist.dialogs.EditListItemListener
 import kg.abu.shoppinglist.entities.ShopListItem
 import kg.abu.shoppinglist.entities.ShopListNameItem
+import kg.abu.shoppinglist.utils.ShareHelper
 
 class ShopListActivity : AppCompatActivity(), ShopListItemListener {
     private lateinit var binding: ActivityShopListBinding
@@ -55,13 +57,27 @@ class ShopListActivity : AppCompatActivity(), ShopListItemListener {
             R.id.save_item -> {
                 adNewShopItem()
             }
+
             R.id.delete_list -> {
                 mainViewModel.deleteShopList(shopListNameItem?.id!!, true)
                 finish()
             }
+
             R.id.clear_list -> {
                 mainViewModel.deleteShopList(shopListNameItem?.id!!, false)
                 finish()
+            }
+
+            R.id.share_list -> {
+                startActivity(
+                    Intent.createChooser(
+                        ShareHelper.shareShopList(
+                            adapter?.currentList!!,
+                            shopListNameItem?.name!!
+                        ),
+                        "Share by"
+                    )
+                )
             }
         }
         return super.onOptionsItemSelected(item)
