@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
+import kg.abu.shoppinglist.entities.LibraryItem
 import kg.abu.shoppinglist.entities.NoteItem
 import kg.abu.shoppinglist.entities.ShopListNameItem
 import kg.abu.shoppinglist.entities.ShopListItem
@@ -28,11 +29,18 @@ class MainViewModel(database: MainDatabase) : ViewModel() {
 
     fun insertShopItem(shopListItem: ShopListItem) = viewModelScope.launch {
         dao.insertItem(shopListItem)
+        if (!isLibraryItemExists(shopListItem.name)) dao.insertLibraryItem(
+            LibraryItem(
+                null,
+                shopListItem.name,
+                ""
+            )
+        )
     }
+
     fun updateListItem(item: ShopListItem) = viewModelScope.launch {
         dao.updateListItem(item)
     }
-
 
     fun updateNote(note: NoteItem) = viewModelScope.launch {
         dao.updateNote(note)
@@ -47,8 +55,12 @@ class MainViewModel(database: MainDatabase) : ViewModel() {
     }
 
     fun deleteShopList(id: Int, deleteList: Boolean) = viewModelScope.launch {
-        if (deleteList)dao.deleteShopListName(id)
+        if (deleteList) dao.deleteShopListName(id)
         dao.deleteShopItemsByListId(id)
+    }
+
+    private suspend fun isLibraryItemExists(name: String): Boolean {
+        return dao.getAllLibraryItems(name).isNotEmpty()
     }
 
 }
