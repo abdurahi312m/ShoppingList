@@ -18,7 +18,7 @@ data class ShopListNameItem(
     val time: String,
 
     @ColumnInfo(name = "allItemCounter")
-    val allItemCount: Int,
+    val allItemCounter: Int,
 
     @ColumnInfo(name = "checkedItemsCounter")
     val checkedItemsCounter: Int,
@@ -26,4 +26,4 @@ data class ShopListNameItem(
     @ColumnInfo(name = "itemsIds")
     val itemsIds: String,
 
-): Serializable
+    ): Serializable

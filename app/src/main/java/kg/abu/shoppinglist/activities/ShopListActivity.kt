@@ -235,4 +235,24 @@ class ShopListActivity : AppCompatActivity(), ShopListItemListener {
             }
         })
     }
+
+    private fun saveItemCount() {
+        var checkedItemCounter = 0
+        adapter?.currentList?.forEach {
+            if (it.itemChecked) checkedItemCounter++
+        }
+        val tempShopListNameItem = shopListNameItem?.copy(
+            allItemCounter = adapter?.itemCount!!,
+            checkedItemsCounter = checkedItemCounter
+        )
+        mainViewModel.updateListName(tempShopListNameItem!!)
+    }
+
+    @Deprecated("Deprecated in Java",
+        ReplaceWith("super.onBackPressed()", "androidx.appcompat.app.AppCompatActivity")
+    )
+    override fun onBackPressed() {
+        saveItemCount()
+        super.onBackPressed()
+    }
 }
