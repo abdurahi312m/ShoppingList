@@ -8,7 +8,10 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import kg.abu.shoppinglist.R
 import kg.abu.shoppinglist.adapter.ShopListItemAdapter.Companion.CHECK_BOX
+import kg.abu.shoppinglist.adapter.ShopListItemAdapter.Companion.DELETE_LIBRARY_ITEM
 import kg.abu.shoppinglist.adapter.ShopListItemAdapter.Companion.EDIT
+import kg.abu.shoppinglist.adapter.ShopListItemAdapter.Companion.EDIT_LIBRARY_ITEM
+import kg.abu.shoppinglist.databinding.ShopLibraryListItemBinding
 import kg.abu.shoppinglist.databinding.ShopListItemBinding
 import kg.abu.shoppinglist.entities.ShopListItem
 
@@ -31,7 +34,18 @@ class ShopListItemHolder(val view: View) : RecyclerView.ViewHolder(view) {
         }
     }
 
-    fun setLibraryData(shopListItem: ShopListItem, listener: ShopListItemListener) {}
+    fun setLibraryData(shopListItem: ShopListItem, listener: ShopListItemListener) {
+        val binding = ShopLibraryListItemBinding.bind(view)
+        binding.apply {
+            tvName.text = shopListItem.name
+            imEdit.setOnClickListener {
+                listener.onClickItem(shopListItem, EDIT_LIBRARY_ITEM)
+            }
+            imDelete.setOnClickListener {
+                listener.onClickItem(shopListItem, DELETE_LIBRARY_ITEM)
+            }
+        }
+    }
 
     private fun setPaintFlagAndColor(binding: ShopListItemBinding) {
         binding.apply {
@@ -48,7 +62,7 @@ class ShopListItemHolder(val view: View) : RecyclerView.ViewHolder(view) {
     }
 
     private fun infoVisibility(shopListItem: ShopListItem): Int {
-        return if (shopListItem.itemInfo.isNullOrEmpty()) {
+        return if (shopListItem.itemInfo.isEmpty()) {
             View.GONE
         } else {
             View.VISIBLE

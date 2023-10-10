@@ -20,4 +20,6 @@
     <string name="share_list">Share List</string>
     <string name="update_list_item">Update List Item</string>
     <string name="save_item">Save item</string>
+    <string name="todo">TODO</string>
+    <string name="textview">TextView</string>
 </resources>
