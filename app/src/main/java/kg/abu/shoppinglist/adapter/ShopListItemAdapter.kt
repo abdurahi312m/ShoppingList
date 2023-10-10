@@ -32,6 +32,7 @@ class ShopListItemAdapter(private val listener: ShopListItemListener) :
         const val CHECK_BOX = 1
         const val EDIT_LIBRARY_ITEM = 2
         const val DELETE_LIBRARY_ITEM = 3
+        const val ADD_ITEM = 4
     }
 
 }

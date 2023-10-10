@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import kg.abu.shoppinglist.R
+import kg.abu.shoppinglist.adapter.ShopListItemAdapter.Companion.ADD_ITEM
 import kg.abu.shoppinglist.adapter.ShopListItemAdapter.Companion.CHECK_BOX
 import kg.abu.shoppinglist.adapter.ShopListItemAdapter.Companion.DELETE_LIBRARY_ITEM
 import kg.abu.shoppinglist.adapter.ShopListItemAdapter.Companion.EDIT
@@ -43,6 +44,9 @@ class ShopListItemHolder(val view: View) : RecyclerView.ViewHolder(view) {
             }
             imDelete.setOnClickListener {
                 listener.onClickItem(shopListItem, DELETE_LIBRARY_ITEM)
+            }
+            itemView.setOnClickListener {
+                listener.onClickItem(shopListItem, ADD_ITEM)
             }
         }
     }
