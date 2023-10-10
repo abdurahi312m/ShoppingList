@@ -21,6 +21,7 @@ import kg.abu.shoppinglist.db.MainViewModel
 import kg.abu.shoppinglist.db.MainViewModelFactory
 import kg.abu.shoppinglist.dialogs.EditListItemDialog
 import kg.abu.shoppinglist.dialogs.EditListItemListener
+import kg.abu.shoppinglist.entities.LibraryItem
 import kg.abu.shoppinglist.entities.ShopListItem
 import kg.abu.shoppinglist.entities.ShopListNameItem
 import kg.abu.shoppinglist.utils.ShareHelper
@@ -66,10 +67,11 @@ class ShopListActivity : AppCompatActivity(), ShopListItemListener {
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 Log.d("MyTAG", "onTextChanged: $s")
+                mainViewModel.getAllLibraryItems("%$s%")
             }
 
             override fun afterTextChanged(s: Editable?) {
-                
+
             }
 
         }
@@ -131,6 +133,29 @@ class ShopListActivity : AppCompatActivity(), ShopListItemListener {
         }
     }
 
+    private fun libraryItemObserver() {
+        mainViewModel.libraryItems.observe(this) {
+            val tempShopList = ArrayList<ShopListItem>()
+            it.forEach { item ->
+                val shopItem = ShopListItem(
+                    item.id,
+                    item.name,
+                    "",
+                    false,
+                    0,
+                    1
+                )
+                tempShopList.add(shopItem)
+            }
+            adapter?.submitList(tempShopList)
+            binding.tvEmpty.visibility = if (it.isEmpty()) {
+                View.VISIBLE
+            } else {
+                View.GONE
+            }
+        }
+    }
+
     private fun initRcView() = with(binding) {
         adapter = ShopListItemAdapter(this@ShopListActivity)
         rcView.layoutManager = LinearLayoutManager(this@ShopListActivity)
@@ -142,6 +167,10 @@ class ShopListActivity : AppCompatActivity(), ShopListItemListener {
             override fun onMenuItemActionExpand(item: MenuItem): Boolean {
                 saveItem.isVisible = true
                 edItem?.addTextChangedListener(textWatcher)
+                libraryItemObserver()
+                mainViewModel.getAllItemsFromList(shopListNameItem?.id!!)
+                    .removeObservers(this@ShopListActivity)
+                mainViewModel.getAllLibraryItems("%%")
                 return true
             }
 
@@ -149,6 +178,9 @@ class ShopListActivity : AppCompatActivity(), ShopListItemListener {
                 saveItem.isVisible = false
                 edItem?.removeTextChangedListener(textWatcher)
                 invalidateOptionsMenu()
+                mainViewModel.libraryItems.removeObservers(this@ShopListActivity)
+                edItem?.setText("")
+                listItemObserver()
                 return true
             }
         }
@@ -171,6 +203,15 @@ class ShopListActivity : AppCompatActivity(), ShopListItemListener {
             ShopListItemAdapter.EDIT -> {
                 editListItem(shopListItem)
             }
+
+            ShopListItemAdapter.EDIT_LIBRARY_ITEM -> {
+                editLibraryItem(shopListItem)
+            }
+
+            ShopListItemAdapter.DELETE_LIBRARY_ITEM -> {
+                mainViewModel.deleteLibraryItem(shopListItem.id!!)
+                mainViewModel.getAllLibraryItems("%${edItem?.text.toString()}%")
+            }
         }
     }
 
@@ -178,6 +219,15 @@ class ShopListActivity : AppCompatActivity(), ShopListItemListener {
         EditListItemDialog.showDialog(this, item, object : EditListItemListener {
             override fun onClick(item: ShopListItem) {
                 mainViewModel.updateListItem(item)
+            }
+        })
+    }
+
+    private fun editLibraryItem(item: ShopListItem) {
+        EditListItemDialog.showDialog(this, item, object : EditListItemListener {
+            override fun onClick(item: ShopListItem) {
+                mainViewModel.updateLibraryItem(LibraryItem(item.id, item.name, item.itemInfo))
+                mainViewModel.getAllLibraryItems("%${edItem?.text.toString()}%")
             }
         })
     }
